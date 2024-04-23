@@ -70,13 +70,16 @@ public class CompteBancaire {
      */
     public void debiterMontant(double montant) {
         if (type.equals("CC")) {
-            if (this.solde - montant > decouvert) {
+            if (this.solde - montant >= -this.decouvert) {
+                //On soustraie maintenant si le montant à retirer fait passer le compte du positif vers le négatif
                 this.solde = solde - montant;
             }
         } else if (type.equals("LA")) {
             if (this.solde - montant > 0) {
                 this.solde = solde - montant;
             }
+            else
+                this.solde = 0;
         }
     }
 
